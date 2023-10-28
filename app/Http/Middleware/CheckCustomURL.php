@@ -14,10 +14,9 @@ class CheckCustomURL
      */
     public function handle(Request $request, Closure $next)
     {
-        $customURL = "http://laraveleco.app.local:1300/";
-
+        $customURL = $_SERVER['HTTP_HOST'].'/';
         // Get the base URL without any additional segments.
-        $baseUrl = $request->getSchemeAndHttpHost() . '/';
+        $baseUrl = str_replace('http://', '', $request->getSchemeAndHttpHost() . '/');
         if ($baseUrl === $customURL) {
             return $next($request);
         }
