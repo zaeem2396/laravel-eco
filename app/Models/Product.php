@@ -8,8 +8,4 @@ use Illuminate\Support\Facades\DB;
 
 class Product extends Model
 {
-    public static function getProducts() {
-        $products = DB::table('products')->select('*')->get();
-        return $products;
-    }
 }
