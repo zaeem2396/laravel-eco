@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ProductController;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,9 +19,8 @@ Route::middleware(['custom.url'])->group(function () {
     Route::get('/', function () {
         return view('welcome');
     });
-    Route::get('/home', function () {
-        echo "home";
-    });
+    Route::get('/products',[ ProductController::class, 'products']);
+    
 });
 
 

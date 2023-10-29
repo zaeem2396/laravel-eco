@@ -14,9 +14,18 @@ class CheckCustomURL
      */
     public function handle(Request $request, Closure $next)
     {
-        $customURL = $_SERVER['HTTP_HOST'].'/';
-        // Get the base URL without any additional segments.
-        $baseUrl = str_replace('http://', '', $request->getSchemeAndHttpHost() . '/');
+        $customURL = $_SERVER['HTTP_HOST'] . '/';
+        // Get the base URL
+        $baseUrl = $request->getSchemeAndHttpHost() . '/';
+
+        if (strpos($baseUrl, 'http://') === 0) {
+            // URL starts with "http", so remove it
+            $baseUrl = str_replace('http://', '', $baseUrl);
+        } elseif (strpos($baseUrl, 'https://') === 0) {
+            // URL starts with "https", so remove it
+            $baseUrl = str_replace('https://', '', $baseUrl);
+        }
+ 
         if ($baseUrl === $customURL) {
             return $next($request);
         }
