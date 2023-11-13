@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\WebSocketController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,9 +20,14 @@ Route::middleware(['custom.url'])->group(function () {
     Route::get('/', function () {
         return view('welcome');
     });
-    Route::get('/products',[ ProductController::class, 'products']);
+    Route::get('/products', [ProductController::class, 'products']);
 });
 
+// Getting error while running laravel socket
+Route::get('/socket', [WebSocketController::class, 'index']);
+
+
+// Routes created by laravel/breeze
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -32,4 +38,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
