@@ -19,7 +19,10 @@ Route::middleware(['custom.url'])->group(function () {
     Route::get('/', function () {
         return view('welcome');
     });
-    Route::get('/products',[ ProductController::class, 'products']);
+    Route::get('/otp-login', function () {
+        return view('auth.otplogin');
+    });
+    Route::get('/products', [ProductController::class, 'products']);
 });
 
 Route::get('/dashboard', function () {
@@ -32,4 +35,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
